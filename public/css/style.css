@@ -1,0 +1,11 @@
+:root {
+    --background-dark: #242527;
+}
+
+body {
+    background: var(--background-dark);
+}
+
+nav {
+    margin-bottom: 2rem;
+}
