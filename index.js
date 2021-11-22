@@ -23,7 +23,10 @@ app.get('/ask', (req, res) => {
 });
 
 app.post('/save-question', (req, res) => {
-    res.send("Formulário recebido");
+    let title = req.body.title;
+    let description = req.body.description;
+
+    res.send(`Formulário recebido com sucesso! Título: ${title}. Descrição: ${description}`);
 })
 
 // subindo servidor:
