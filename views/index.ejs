@@ -12,7 +12,26 @@
 </head>
 <body>
     <%- include('partials/navbar.ejs'); -%>
-    <h1>Estilo do bootstrap</h1>    
+
+    <div class="container">
+        <div class="d-flex justify-content-end">
+            <a href="/ask" class="btn btn-success mb-4 pull-right">Perguntar</a>
+        </div>
+        
+        <% questions.forEach(question => { %>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5><%= question.title %></h5>
+                    <p><%= question.description %></p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary">Responder</button>
+                </div>
+            </div>
+
+        <% }) %>
+    </div>  
 </body>
 
 <%- include('partials/footer.ejs'); -%>

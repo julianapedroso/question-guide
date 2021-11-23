@@ -28,7 +28,11 @@ app.use(bodyParser.json());
 
 // Rotas
 app.get('/', (req, res) => {
-    res.render('index');
+    Question.findAll({ raw: true }).then((questions) => {
+        res.render('index', {
+            questions: questions,
+        })
+    })
 });
 
 app.get('/ask', (req, res) => {
