@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const connetion = require('./database/database');
-const questionModel = require('./database/Question');
+// model:
+const Question = require('./database/Question');
 
 // database:
 connetion
@@ -37,8 +38,14 @@ app.get('/ask', (req, res) => {
 app.post('/save-question', (req, res) => {
     let title = req.body.title;
     let description = req.body.description;
-
-    res.send(`Formulário recebido com sucesso! Título: ${title}. Descrição: ${description}`);
+    Question.create({
+        title: title,
+        description: description,
+    }).then(() => {
+        res.redirect('/');
+    }).catch((err) => {
+        console.log(err);
+    })
 })
 
 // subindo servidor:
