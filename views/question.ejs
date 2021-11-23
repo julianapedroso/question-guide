@@ -18,12 +18,20 @@
         <small><%= question.description %></small>
         <hr>
 
-        <form class="mt-4">
+        <form class="mt-4" method="post" action="/answer">
             <h6>Contribua abaixo com sua explicação :)</h6>
             <textarea class="form-control" name="body" id="body" cols="30" rows="10" placeholder="Digite a sua resposta*" required></textarea>
             <input type="hidden" name="question" id="question" value="<%= question.id %>">
             <button type="submit" class="btn btn-dark mt-4">Responder</button>
         </form>
+        <h5 class="my-4 text-center text-uppercase"><strong>Respostas</strong></h5>
+        <% answers.forEach(answer => { %>
+            <div class="card mb-2">
+                <div class="card-body">
+                    <small>"<%= answer.body %>"</small>
+                </div>
+            </div>
+        <% }) %>
     </div>  
 </body>
 

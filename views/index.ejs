@@ -17,9 +17,10 @@
         <div class="d-flex justify-content-end">
             <a href="/ask" class="btn btn-success mb-4 pull-right">Perguntar</a>
         </div>
+
+        <h5 class="mb-4 text-center text-uppercase"><strong>Painel de perguntas</strong></h5>
         
         <% questions.forEach(question => { %>
-
             <div class="card mb-4">
                 <div class="card-body">
                     <h5><%= question.title %></h5>
@@ -31,7 +32,6 @@
                     </a>
                 </div>
             </div>
-
         <% }) %>
     </div>  
 </body>

@@ -10,7 +10,7 @@ const Answer = require('./database/Answer');
 connetion
     .authenticate()
     .then(() => {
-        console.log('Conexão realizada com sucesso!');
+        console.log('Connection successful!');
     })
     .catch((err) => {
         console.log(err);
@@ -57,14 +57,33 @@ app.post('/save-question', (req, res) => {
     })
 });
 
+app.post('/answer', (req, res) => {
+    let body = req.body.body;
+    let questionId = req.body.question;
+    Answer.create({
+        body: body,
+        questionId: questionId
+    }).then(() => {
+        res.redirect(`/question/${questionId}`);
+    });
+})
+
 app.get('/question/:id', (req, res) => {
     let id = req.params.id;
     Question.findOne({
         where: { id: id }
     }).then((question) => {
         if (question != undefined) {
-            res.render('question', {
-                question: question
+            Answer.findAll({
+                where: { questionId: question.id },
+                raw: true, order: [
+                    ['id', 'DESC']
+                ]
+            }).then((answers) => {
+                res.render('question', {
+                    question: question,
+                    answers: answers,
+                });
             });
         } else {
             res.redirect('/');
