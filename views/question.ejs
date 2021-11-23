@@ -14,8 +14,16 @@
     <%- include('partials/navbar.ejs'); -%>
 
     <div class="container">
-        <h4><%= question.title %></h4>
-        <p><%= question.description %></p>
+        <h5><strong><%= question.title %></strong></h5>
+        <small><%= question.description %></small>
+        <hr>
+
+        <form class="mt-4">
+            <h6>Contribua abaixo com sua explicação :)</h6>
+            <textarea class="form-control" name="body" id="body" cols="30" rows="10" placeholder="Digite a sua resposta*" required></textarea>
+            <input type="hidden" name="question" id="question" value="<%= question.id %>">
+            <button type="submit" class="btn btn-dark mt-4">Responder</button>
+        </form>
     </div>  
 </body>
 
