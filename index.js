@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const connetion = require('./database/database');
-// model:
+// models:
 const Question = require('./database/Question');
+const Answer = require('./database/Answer');
 
 // database:
 connetion
