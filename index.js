@@ -13,7 +13,7 @@ connetion
     })
     .catch((err) => {
         console.log(err);
-    })
+    });
 
 // adicionando ejs:
 app.set('view engine', 'ejs');
@@ -22,15 +22,17 @@ app.use(express.static('public'));
 // adicionando body parser:
 app.use(bodyParser.urlencoded({
     extended: false
-}))
+}));
 // adicionando leitura via json:
 app.use(bodyParser.json());
 
 // Rotas
 app.get('/', (req, res) => {
-    Question.findAll({ raw: true, order: [
-        ['id', 'DESC']
-    ] }).then((questions) => {
+    Question.findAll({
+        raw: true, order: [
+            ['id', 'DESC']
+        ]
+    }).then((questions) => {
         res.render('index', {
             questions: questions,
         })
@@ -52,7 +54,22 @@ app.post('/save-question', (req, res) => {
     }).catch((err) => {
         console.log(err);
     })
-})
+});
+
+app.get('/question/:id', (req, res) => {
+    let id = req.params.id;
+    Question.findOne({
+        where: { id: id }
+    }).then((question) => {
+        if (question != undefined) {
+            res.render('question', {
+                question: question
+            });
+        } else {
+            res.redirect('/');
+        }
+    })
+});
 
 // subindo servidor:
 app.listen(8080, () => {
